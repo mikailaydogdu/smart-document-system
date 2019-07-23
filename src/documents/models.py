@@ -16,11 +16,13 @@ class Documents(models.Model):
     """
     Document Master table dökümana ait genel bilgilerin bulunduğu table
     """
-    title       = models.CharField(max_length=36, verbose_name='Döküman Başlık')
-    doc         = models.FileField(verbose_name='Dosya')
-    type        = models.CharField(max_length=36, verbose_name='Dosta Türü')
-    create_date = models.DateTimeField(auto_now_add=True, verbose_name='Dokuman Ekleme Tarihi')
-    active      = models.BooleanField(default=True)
+    title           = models.CharField(max_length=36, verbose_name='Döküman Başlık')
+    doc             = models.FileField(verbose_name='Dokumanlarım')
+    image           = models.ImageField(verbose_name='Resim Dosyalarım')
+    type            = models.CharField(max_length=36, verbose_name='Dosta Türü')
+    create_date     = models.DateTimeField(auto_now_add=True, verbose_name='Dokuman Ekleme Tarihi')
+    revision_date   = models.DateTimeField(auto_now_add=True, verbose_name='Revizyon Tarihi')
+    active          = models.BooleanField(default=True)
 
 class Documents_Hash(models.Model):
     """
