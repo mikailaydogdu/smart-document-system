@@ -62,7 +62,7 @@ class Documents(models.Model):
     create_date     = models.DateTimeField(auto_now_add=True, null=True, blank=True, verbose_name='Dokuman Ekleme Tarihi')
     revision_date   = models.DateTimeField(auto_now_add=True, null=True, blank=True, verbose_name='Revizyon Tarihi')
     hash            = models.CharField(max_length=64,null=True,blank=True ,verbose_name='document_hash')
-    fallow          = models.ManyToManyField('self')
+    fallow          = models.ManyToManyField('self',null=True,blank=True)
 
 
     def __str__(self):
