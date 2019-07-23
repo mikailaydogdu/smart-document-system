@@ -18,10 +18,19 @@ class my_codes(models.Model):
     def __str__(self):
         return self.title
 
-# x  = my_codes.objects.all().filter(type='DOKUMAN')
-#
-# for i in x:
-#     print(i)
+x  = my_codes.objects.all().filter(type='DOKUMAN') #.values_list('id','title')
+# x  = my_codes.objects.all()
+
+xlist=[]
+for i in x.values_list('id','title'):
+    xlist.append(i)
+
+
+
+# xchc = tuple()
+# for z in xlist:
+#     xchc +=z
+
 
 #
 # with connection.cursor() as cursor:
@@ -44,7 +53,7 @@ class Documents(models.Model):
 
     """
 
-    type_id = models.ForeignKey(my_codes , null=True, blank=True, on_delete=models.CASCADE,verbose_name='Dosta Türü', choices=xchoices)
+    type_id         = models.IntegerField(null=True, blank=True, verbose_name='Dosta Türü', choices=xlist)
     title           = models.CharField(max_length=36, verbose_name='Döküman Başlık')
     doc             = models.FileField(verbose_name='Dokumanlarım')
     image           = models.ImageField(verbose_name='Resim Dosyalarım',null=True,blank=True)
