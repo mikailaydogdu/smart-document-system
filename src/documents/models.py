@@ -1,7 +1,4 @@
 from django.db import models
-from pip._vendor.msgpack.fallback import xrange
-from django.db import connection
-
 from users.models import UserTable
 
 
@@ -18,33 +15,15 @@ class my_codes(models.Model):
     def __str__(self):
         return self.title
 
-x  = my_codes.objects.all().filter(type='DOKUMAN') #.values_list('id','title')
-# x  = my_codes.objects.all()
-
+"""
+type_id de choices a dinamik liste göndermek için
+yapılan küçük bir döngü
+"""
+x  = my_codes.objects.all().filter(type='DOKUMAN')
 xlist=[]
 for i in x.values_list('id','title'):
     xlist.append(i)
 
-
-
-# xchc = tuple()
-# for z in xlist:
-#     xchc +=z
-
-
-#
-# with connection.cursor() as cursor:
-#     cursor.execute('select cc.id,cc.title from documents_my_codes cc where cc.type="DOKUMAN"')
-#     result = cursor.fetchall()
-#
-# xchoices = ()
-# for i in result:
-#     xchoices +=i
-#
-# print(xchoices)
-
-xchoices = ((1, 'Kalite El Kitabı'), (2, 'Prosedürler'),(3, 'Form'), (4, 'Liste'), (5, 'Görev Tanımı'), (6, 'Proses Haritasi'),( 7, 'Şema'),( 8, 'Süreç'),
-            (9, 'Talimat'), (10, 'Plan'))
 
 class Documents(models.Model):
     """
@@ -52,7 +31,6 @@ class Documents(models.Model):
     genel bilgilerin bulunduğu table
 
     """
-
     type_id         = models.IntegerField(null=True, blank=True, verbose_name='Dosta Türü', choices=xlist)
     title           = models.CharField(max_length=36, verbose_name='Döküman Başlık')
     doc             = models.FileField(verbose_name='Dokumanlarım')
