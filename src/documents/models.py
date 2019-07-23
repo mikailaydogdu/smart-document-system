@@ -22,7 +22,7 @@ class Documents(models.Model):
     title           = models.CharField(max_length=36, verbose_name='Döküman Başlık')
     doc             = models.FileField(verbose_name='Dokumanlarım')
     image           = models.ImageField(verbose_name='Resim Dosyalarım',null=True,blank=True)
-    type            = models.CharField(max_length=36,null=True,blank=True, verbose_name='Dosta Türü')
+    type_id         = models.ForeignKey(my_codes,null=True,blank=True, on_delete=models.CASCADE, verbose_name='Dosta Türü')
     create_date     = models.DateTimeField(auto_now_add=True,null=True,blank=True, verbose_name='Dokuman Ekleme Tarihi')
     revision_date   = models.DateTimeField(auto_now_add=True,null=True, blank=True, verbose_name='Revizyon Tarihi')
     active          = models.BooleanField(default=True)
