@@ -1,7 +1,7 @@
 from django.db import models
 
 # Create your models here.
-class mykods(models.Model):
+class my_codes(models.Model):
     pass
 
 class user(models.Model):
