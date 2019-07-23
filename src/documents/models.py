@@ -5,7 +5,7 @@ from users.models import UserTable
 # Create your models here.
 class my_codes(models.Model):
     """
-    Kodların tutulduğu table burada
+    Kodların tutulduğu table
     """
     type    = models.CharField(max_length=32, verbose_name='Dokuman Turu')
     code    = models.CharField(max_length=16, verbose_name='Kısa Kodu')
