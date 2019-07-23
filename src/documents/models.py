@@ -11,6 +11,9 @@ class my_codes(models.Model):
     code    = models.CharField(max_length=16, verbose_name='Kısa Kodu')
     title   = models.CharField(max_length=32, verbose_name='Kod Açıklaması')
 
+    def __str__(self):
+        return self.title
+
 
 class Documents(models.Model):
     """
@@ -18,11 +21,14 @@ class Documents(models.Model):
     """
     title           = models.CharField(max_length=36, verbose_name='Döküman Başlık')
     doc             = models.FileField(verbose_name='Dokumanlarım')
-    image           = models.ImageField(verbose_name='Resim Dosyalarım')
-    type            = models.CharField(max_length=36, verbose_name='Dosta Türü')
-    create_date     = models.DateTimeField(auto_now_add=True, verbose_name='Dokuman Ekleme Tarihi')
-    revision_date   = models.DateTimeField(auto_now_add=True, verbose_name='Revizyon Tarihi')
+    image           = models.ImageField(verbose_name='Resim Dosyalarım',null=True,blank=True)
+    type            = models.CharField(max_length=36,null=True,blank=True, verbose_name='Dosta Türü')
+    create_date     = models.DateTimeField(auto_now_add=True,null=True,blank=True, verbose_name='Dokuman Ekleme Tarihi')
+    revision_date   = models.DateTimeField(auto_now_add=True,null=True, blank=True, verbose_name='Revizyon Tarihi')
     active          = models.BooleanField(default=True)
+
+    def __str__(self):
+        return self.title
 
 class Documents_Hash(models.Model):
     """
