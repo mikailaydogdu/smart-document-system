@@ -20,10 +20,10 @@ class Documents(models.Model):
     Document Master table dökümana ait
     genel bilgilerin bulunduğu table
     """
+    type_id = models.ForeignKey(my_codes, null=True, blank=True, on_delete=models.CASCADE, verbose_name='Dosta Türü')
     title           = models.CharField(max_length=36, verbose_name='Döküman Başlık')
     doc             = models.FileField(verbose_name='Dokumanlarım')
     image           = models.ImageField(verbose_name='Resim Dosyalarım',null=True,blank=True)
-    type_id         = models.ForeignKey(my_codes,null=True,blank=True, on_delete=models.CASCADE, verbose_name='Dosta Türü')
     active          = models.BooleanField(default=True)
     comment         = models.TextField(default=256)
     create_date     = models.DateTimeField(auto_now_add=True, null=True, blank=True, verbose_name='Dokuman Ekleme Tarihi')
