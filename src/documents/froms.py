@@ -1,38 +1,24 @@
 from django import forms
 
-from SDS.myFuncitons import generate_sha
-from documents.models import Documents, images
+from SDS.myFuncitons import generate_sha, Kodlar
+from documents.models import Documents, MyCodes
 
 
-class FileForm(forms.Form):
+class FileUploadForm(forms.Form):
     Title = forms.CharField(max_length=21, required=True)
-    Doc = forms.FileField(required=True)
+    File = forms.FileField(required=True)
+
+    # Type = forms.ModelChoiceField(queryset=MyCodes.objects.all())
 
     def clean(self):
-        cleaned_data = super(FileForm, self).clean()
+        cleaned_data = super(FileUploadForm, self).clean()
         Title = cleaned_data.get('Title')
-        Doc = cleaned_data.get('Doc')
-        sha1 = generate_sha(Doc)
-        if Documents.objects.filter(doc_sha1=sha1).exists():
-            raise forms.ValidationError('This already exists')
+        File = cleaned_data.get('File')
+        # Type = cleaned_data.get('Type')
+        sha1 = generate_sha(File)
+        if Documents.objects.filter(file_sha1=sha1).exists():
+            raise forms.ValidationError('Eklemeye çalıştığınız dosya sistemede mevcut')
         if not Title:
-            raise forms.ValidationError('No Label')
-        if not Doc:
-            raise forms.ValidationError('No Image')
-
-
-class imageForm(forms.Form):
-    Label = forms.CharField(max_length=21, required=True)
-    Image = forms.ImageField(required=True)
-
-    def clean(self):
-        cleaned_data = super(imageForm, self).clean()
-        Label = cleaned_data.get('Label')
-        Image = cleaned_data.get('Image')
-        sha1 = generate_sha(Image)
-        if images.objects.filter(image_sha1=sha1).exists():
-            raise forms.ValidationError('This already exists')
-        if not Label:
-            raise forms.ValidationError('No Label')
-        if not Image:
-            raise forms.ValidationError('No Image')
+            raise forms.ValidationError('Başlık Alanı boş bırakıldı')
+        if not File:
+            raise forms.ValidationError('Dosya eklemeyi unuttunuz')

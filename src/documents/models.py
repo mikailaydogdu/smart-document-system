@@ -19,6 +19,8 @@ class MyCodes(models.Model):
 type_id de choices a dinamik liste göndermek için
 yapılan küçük bir döngü
 """
+
+
 # x = my_codes.objects.all().filter(type='DOKUMAN')
 # xlist = []
 # for i in x.values_list('id', 'title'):
@@ -34,19 +36,19 @@ class Documents(models.Model):
 
     # choices = [(1,'x')]
 
-    type_id = models.IntegerField(null=True, blank=True, verbose_name='Dosta Türü', choices=choices)
-    title = models.CharField(max_length=36, verbose_name='Döküman Başlık')
-    file = models.FileField(upload_to='documents/%Y/%m/%d',verbose_name='Dokumanlarım',null=True,blank=True)
+    type = models.IntegerField(null=True, blank=True, verbose_name='Dosta Türü', choices=choices)
+    label = models.CharField(max_length=36, verbose_name='Döküman Başlık')
+    file = models.ImageField(upload_to='documents/%Y/%m/%d', verbose_name='Dokumanlarım', null=True, blank=True)
     image = models.ImageField(verbose_name='Resim Dosyalarım', null=True, blank=True)
     active = models.BooleanField(default=True)
     comment = models.TextField(default=256)
     create_date = models.DateTimeField(auto_now_add=True, null=True, blank=True, verbose_name='Dokuman Ekleme Tarihi')
     revision_date = models.DateTimeField(auto_now_add=True, null=True, blank=True, verbose_name='Revizyon Tarihi')
-    hash = models.CharField(max_length=64, null=True, blank=True, verbose_name='document_hash')
+    file_sha1 = models.CharField(max_length=64, null=True, blank=True, verbose_name='document_hash')
     follow = models.ManyToManyField('self', blank=True)
 
     def __str__(self):
-        return self.title
+        return self.label
 
 
 class Documents_user(models.Model):
@@ -57,10 +59,3 @@ class Documents_user(models.Model):
     """
     user_id = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     doc_id = models.ForeignKey(Documents, on_delete=models.CASCADE)
-
-#demo
-class images(models.Model):
-    label = models.CharField(max_length=21, blank=False, null=False)
-    image = models.ImageField(upload_to='images/')
-    image_sha1 = models.CharField(max_length=40, blank=False, null=False)
-    create_time = models.DateTimeField(auto_now=True)

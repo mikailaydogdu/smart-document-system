@@ -9,6 +9,11 @@ from rest_framework import status
 
 from .serializers import FileSerializer
 
+
+def index(request):
+    template_name='demo/index.html'
+    return render(request,template_name)
+
 class FileUploadView(APIView):
     parser_class = (FileUploadParser,)
 
