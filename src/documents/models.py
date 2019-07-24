@@ -36,7 +36,7 @@ class Documents(models.Model):
 
     type_id = models.IntegerField(null=True, blank=True, verbose_name='Dosta Türü', choices=choices)
     title = models.CharField(max_length=36, verbose_name='Döküman Başlık')
-    doc = models.FileField(verbose_name='Dokumanlarım')
+    file = models.FileField(upload_to='documents/%Y/%m/%d',verbose_name='Dokumanlarım',null=True,blank=True)
     image = models.ImageField(verbose_name='Resim Dosyalarım', null=True, blank=True)
     active = models.BooleanField(default=True)
     comment = models.TextField(default=256)
