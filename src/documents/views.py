@@ -1,6 +1,6 @@
 from django.shortcuts import render
 
-from SDS.myFuncitons import generate_sha, Kodlar
+from SDS.myFuncitons import generate_sha
 from documents.froms import FileUploadForm
 from documents.models import Documents, MyCodes
 
@@ -19,11 +19,12 @@ def file(request):
                 # payee=request.user,
                 file=request.FILES['File'],
                 file_sha1=generate_sha(request.FILES['File'],),
-                title=form.cleaned_data.get('Title'),
+                label=form.cleaned_data.get('Label'),
                 # type = form.cleaned_data.get('Type'),
                 )
             xfile.save()
-            return render(request, 'documents/image_form.html', {'form' : form})
+
+            return render(request, 'documents/home.html', {'form' : form})
     else:
         form = FileUploadForm()
     context = {'form': form,}

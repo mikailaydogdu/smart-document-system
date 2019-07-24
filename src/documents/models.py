@@ -33,7 +33,7 @@ class Documents(models.Model):
 
     """
     choices = Kodlar(MyCodes, 'DOKUMANTYPE')
-
+    #
     # choices = [(1,'x')]
 
     type = models.IntegerField(null=True, blank=True, verbose_name='Dosta Türü', choices=choices)
@@ -51,11 +51,11 @@ class Documents(models.Model):
         return self.label
 
 
-class Documents_user(models.Model):
+class DocumentsOwner(models.Model):
     """
     Kullanıcıların eklemiş oldğu ve
     kullanıcılara göre dökümanlara
     ulaşmak için kullanıdığım table
     """
-    user_id = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
-    doc_id = models.ForeignKey(Documents, on_delete=models.CASCADE)
+    user_id = models.ForeignKey(CustomUser, to_field='id', on_delete=models.CASCADE)
+    doc_id = models.ForeignKey(Documents, to_field='id', on_delete=models.CASCADE)
