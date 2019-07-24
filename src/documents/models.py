@@ -1,9 +1,9 @@
 from django.db import models
-from users.models import UserTable
+from accounts.models import CustomUser
 from SDS.myFuncitons import Kodlar
 
 
-class my_codes(models.Model):
+class MyCodes(models.Model):
     """
     Kodların tutulduğu table
     """
@@ -30,7 +30,9 @@ class Documents(models.Model):
     genel bilgilerin bulunduğu table
 
     """
-    choices = Kodlar(my_codes, 'DOKUMAN')
+    choices = Kodlar(MyCodes, 'DOKUMANTYPE')
+
+    # choices = [(1,'x')]
 
     type_id = models.IntegerField(null=True, blank=True, verbose_name='Dosta Türü', choices=choices)
     title = models.CharField(max_length=36, verbose_name='Döküman Başlık')
@@ -53,5 +55,12 @@ class Documents_user(models.Model):
     kullanıcılara göre dökümanlara
     ulaşmak için kullanıdığım table
     """
-    user_id = models.ForeignKey(UserTable, on_delete=models.CASCADE)
+    user_id = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     doc_id = models.ForeignKey(Documents, on_delete=models.CASCADE)
+
+#demo
+class images(models.Model):
+    label = models.CharField(max_length=21, blank=False, null=False)
+    image = models.ImageField(upload_to='images/')
+    image_sha1 = models.CharField(max_length=40, blank=False, null=False)
+    create_time = models.DateTimeField(auto_now=True)
