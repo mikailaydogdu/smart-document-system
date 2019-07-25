@@ -1,6 +1,5 @@
 from django.db import models
 
-from SDS import settings
 # from accounts.models import CustomUser
 from django.conf import settings
 from SDS.myFuncitons import Kodlar
@@ -24,10 +23,6 @@ yapılan küçük bir döngü
 """
 
 
-# x = my_codes.objects.all().filter(type='DOKUMAN')
-# xlist = []
-# for i in x.values_list('id', 'title'):
-#     xlist.append(i)
 
 class Documents(models.Model):
     """
@@ -35,29 +30,32 @@ class Documents(models.Model):
     genel bilgilerin bulunduğu table
 
     """
-    # choices = Kodlar(MyCodes, 'DOKUMANTYPE')
-
-    choices = [(1,'x')]
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, null=True ,on_delete=models.CASCADE,related_name='user_document')
-    type = models.IntegerField(null=True, blank=True, verbose_name='Dosta Türü', choices=choices)
+    choices = Kodlar(MyCodes, 'DOC')
+    # choices = [(1, 'x')]
     label = models.CharField(max_length=36, verbose_name='Döküman Başlık')
-    file = models.ImageField(upload_to='documents/%Y/%m/%d', verbose_name='Dokumanlarım', null=True, blank=True)
-    image = models.ImageField(verbose_name='Resim Dosyalarım', null=True, blank=True)
-    active = models.BooleanField(default=True)
+    type = models.IntegerField(null=True, blank=True, verbose_name='Dosta Türü', choices=choices)
     comment = models.TextField(default=256)
-    create_date = models.DateTimeField(auto_now_add=True, null=True, blank=True, verbose_name='Dokuman Ekleme Tarihi')
-    revision_date = models.DateTimeField(auto_now_add=True, null=True, blank=True, verbose_name='Revizyon Tarihi')
-    file_sha1 = models.CharField(max_length=64, null=True, blank=True, verbose_name='document_hash')
+    active = models.BooleanField(default=True)
     follow = models.ManyToManyField('self', blank=True)
 
     def __str__(self):
         return self.label
 
 #
-# class DocumentsOwner(models.Model):
-#     """
-#     Kullanıcıların eklemiş oldğu ve
-#     kullanıcılara göre dökümanlara
-#     ulaşmak için kullanıdığım table
-#     """
-#     doc_id = models.ForeignKey(Documents,  on_delete=models.CASCADE)
+class DocumentDetails(models.Model):
+    """
+    Kullanıcıların eklemiş oldğu ve
+    kullanıcılara göre dökümanlara
+    ulaşmak için kullanıdığım table
+    """
+    document = models.ForeignKey(Documents, on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, on_delete=models.CASCADE,
+                             related_name='user_document')
+    file = models.ImageField(upload_to='documents/%Y/%m/%d', verbose_name='Dokumanlarım', null=True, blank=True)
+    file_sha1 = models.CharField(max_length=64, null=True, blank=True, verbose_name='document_hash')
+    create_date = models.DateTimeField(auto_now_add=True, null=True, blank=True, verbose_name='Dokuman Ekleme Tarihi')
+    revision_date = models.DateTimeField(auto_now_add=True, null=True, blank=True, verbose_name='Revizyon Tarihi')
+    last_open = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.document.label
