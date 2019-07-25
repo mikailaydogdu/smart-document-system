@@ -1,5 +1,8 @@
 from django.db import models
-from accounts.models import CustomUser
+
+from SDS import settings
+# from accounts.models import CustomUser
+from django.conf import settings
 from SDS.myFuncitons import Kodlar
 
 
@@ -32,10 +35,10 @@ class Documents(models.Model):
     genel bilgilerin bulunduğu table
 
     """
-    choices = Kodlar(MyCodes, 'DOKUMANTYPE')
-    #
-    # choices = [(1,'x')]
+    # choices = Kodlar(MyCodes, 'DOKUMANTYPE')
 
+    choices = [(1,'x')]
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, null=True ,on_delete=models.CASCADE,related_name='user_document')
     type = models.IntegerField(null=True, blank=True, verbose_name='Dosta Türü', choices=choices)
     label = models.CharField(max_length=36, verbose_name='Döküman Başlık')
     file = models.ImageField(upload_to='documents/%Y/%m/%d', verbose_name='Dokumanlarım', null=True, blank=True)
@@ -50,12 +53,11 @@ class Documents(models.Model):
     def __str__(self):
         return self.label
 
-
-class DocumentsOwner(models.Model):
-    """
-    Kullanıcıların eklemiş oldğu ve
-    kullanıcılara göre dökümanlara
-    ulaşmak için kullanıdığım table
-    """
-    user_id = models.ForeignKey(CustomUser, to_field='id', on_delete=models.CASCADE)
-    doc_id = models.ForeignKey(Documents, to_field='id', on_delete=models.CASCADE)
+#
+# class DocumentsOwner(models.Model):
+#     """
+#     Kullanıcıların eklemiş oldğu ve
+#     kullanıcılara göre dökümanlara
+#     ulaşmak için kullanıdığım table
+#     """
+#     doc_id = models.ForeignKey(Documents,  on_delete=models.CASCADE)

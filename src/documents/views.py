@@ -16,7 +16,6 @@ def file(request):
         form = FileUploadForm(request.POST, request.FILES)
         if form.is_valid():
             xfile = Documents (
-                # payee=request.user,
                 file=request.FILES['File'],
                 file_sha1=generate_sha(request.FILES['File'],),
                 label=form.cleaned_data.get('Label'),

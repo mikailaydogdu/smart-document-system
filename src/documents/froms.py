@@ -14,7 +14,7 @@ class FileUploadForm(forms.Form):
         cleaned_data = super(FileUploadForm, self).clean()
         Label = cleaned_data.get('Label')
         File = cleaned_data.get('File')
-        # Type = cleaned_data.get('Type')
+        Type = cleaned_data.get('Type')
         sha1 = generate_sha(File)
         if Documents.objects.filter(file_sha1=sha1).exists():
             raise forms.ValidationError('Eklemeye çalıştığınız dosya sistemede mevcut')
