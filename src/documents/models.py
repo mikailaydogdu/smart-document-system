@@ -1,6 +1,5 @@
 from django.db import models
 
-# from accounts.models import CustomUser
 from django.conf import settings
 from SDS.myFuncitons import Kodlar
 
@@ -23,23 +22,25 @@ yapılan küçük bir döngü
 """
 
 
-
 class Documents(models.Model):
     """
     Document Master table dökümana ait
     genel bilgilerin bulunduğu table
 
     """
-    choices = Kodlar(MyCodes, 'DOC')
+    choices = Kodlar(MyCodes, 'DOKUMANTYPE')
     # choices = [(1, 'x')]
+    kk = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, on_delete=models.CASCADE)
     label = models.CharField(max_length=36, verbose_name='Döküman Başlık')
     type = models.IntegerField(null=True, blank=True, verbose_name='Dosta Türü', choices=choices)
     comment = models.TextField(default=256)
     active = models.BooleanField(default=True)
     follow = models.ManyToManyField('self', blank=True)
+    created_date = models.DateTimeField(auto_now_add=True, null=True)
 
     def __str__(self):
         return self.label
+
 
 #
 class DocumentDetails(models.Model):
@@ -49,13 +50,12 @@ class DocumentDetails(models.Model):
     ulaşmak için kullanıdığım table
     """
     document = models.ForeignKey(Documents, on_delete=models.CASCADE)
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, on_delete=models.CASCADE,
-                             related_name='user_document')
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     file = models.ImageField(upload_to='documents/%Y/%m/%d', verbose_name='Dokumanlarım', null=True, blank=True)
     file_sha1 = models.CharField(max_length=64, null=True, blank=True, verbose_name='document_hash')
     create_date = models.DateTimeField(auto_now_add=True, null=True, blank=True, verbose_name='Dokuman Ekleme Tarihi')
     revision_date = models.DateTimeField(auto_now_add=True, null=True, blank=True, verbose_name='Revizyon Tarihi')
-    last_open = models.DateTimeField(auto_now_add=True)
+    last_open = models.DateTimeField(auto_now_add=True, blank=True)
 
     def __str__(self):
         return self.document.label

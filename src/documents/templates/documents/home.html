@@ -7,7 +7,9 @@
     <div class="container" align="center">
         <h1>Belge Listesi</h1>
         {% for i in qm %}
-            <li> {{ i }}</li>
+            <div align="left">
+              <p>{{ i.label }} - {{ i.type }} - {{ i.comment }} - {{ i.active }}</p>
+            </div>
         {% endfor %}
     </div>
 {% endblock %}
