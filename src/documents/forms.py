@@ -30,12 +30,14 @@ class DocumentForm(ModelForm):
             raise forms.ValidationError('Dosya eklemeyi unuttunuz')
 
 
+
 class DocumentDetailForm(ModelForm):
+    file = forms.FileField(required=True)
     class Meta:
         model = DocumentDetails
-        fields = ['document', 'user']
+        fields = ['document', 'user','file']
 
-    file = forms.FileField(required=True)
+
 
     def clean(self):
         cleaned_data = super(DocumentDetailForm, self).clean()

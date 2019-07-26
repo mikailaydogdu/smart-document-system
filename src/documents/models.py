@@ -29,7 +29,11 @@ class Documents(models.Model):
 
     """
     choices = Kodlar(MyCodes, 'DOKUMANTYPE')
-    # choices = [(1, 'x')]
+    if not choices:
+        choices = [(1, 'veri yok')]
+    else:
+        choices = Kodlar(MyCodes, 'DOKUMANTYPE')
+
     kk = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, on_delete=models.CASCADE)
     label = models.CharField(max_length=36, verbose_name='Döküman Başlık')
     type = models.IntegerField(null=True, blank=True, verbose_name='Dosta Türü', choices=choices)
@@ -38,7 +42,8 @@ class Documents(models.Model):
     follow = models.ManyToManyField('self', blank=True)
     created_date = models.DateTimeField(auto_now_add=True, null=True)
 
-    def __str__(self):
+
+        def __str__(self):
         return self.label
 
 
