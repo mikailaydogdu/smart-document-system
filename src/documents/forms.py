@@ -52,7 +52,7 @@ class DocumentDetailForm(ModelForm):
 ######################3from
 
 
-class DemoForm(ModelForm):
+class DocumentsForm(ModelForm):
     file = forms.FileField(required=True)
     class Meta:
         model = Documents
@@ -61,7 +61,7 @@ class DemoForm(ModelForm):
 
     def clean(self):
 
-        cleaned_data = super(DemoForm, self).clean()
+        cleaned_data = super(DocumentsForm, self).clean()
         file = self.cleaned_data.get('file')
         sha1 = generate_sha(file)
 
