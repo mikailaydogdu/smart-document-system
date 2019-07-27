@@ -34,7 +34,7 @@ class Documents(models.Model):
     else:
         choices = Kodlar(MyCodes, 'DOKUMANTYPE')
 
-    kk = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, on_delete=models.CASCADE)
+    kk = models.ManyToManyField(settings.AUTH_USER_MODEL)
     label = models.CharField(max_length=36, verbose_name='Döküman Başlık')
     type = models.IntegerField(null=True, blank=True, verbose_name='Dosta Türü', choices=choices)
     comment = models.TextField(default=256)
@@ -43,7 +43,7 @@ class Documents(models.Model):
     created_date = models.DateTimeField(auto_now_add=True, null=True)
 
 
-        def __str__(self):
+    def __str__(self):
         return self.label
 
 

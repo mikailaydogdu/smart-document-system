@@ -1,11 +1,14 @@
 import hashlib
 
+
+
 def Kodlar(xtable, type):
     qry = xtable.objects.all().filter(type=type)
     xlist = []
     for i in qry.values_list('id', 'title'):
         xlist.append(i)
     return xlist
+#
 
 # hasher = hashlib.md5()
 # # with open('/home/engin/PycharmProjects/smart-document-system/src/uploads/Untitled_Diagram.png', 'rb') as afile:

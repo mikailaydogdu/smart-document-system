@@ -15,25 +15,27 @@ from .serializers import FileSerializer
 
 
 def index(request):
-    template_name='demo/index.html'
-    return render(request,template_name)
+    template_name = 'demo/index.html'
+    return render(request, template_name)
+
 
 class FileUploadView(APIView):
     parser_class = (FileUploadParser,)
 
     def post(self, request, *args, **kwargs):
 
-      file_serializer = FileSerializer(data=request.data)
+        file_serializer = FileSerializer(data=request.data)
 
-      if file_serializer.is_valid():
-          file_serializer.save()
-          return Response(file_serializer.data, status=status.HTTP_201_CREATED)
-      else:
-          return Response(file_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        if file_serializer.is_valid():
+            file_serializer.save()
+            return Response(file_serializer.data, status=status.HTTP_201_CREATED)
+        else:
+            return Response(file_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
 def exm(request):
-    if request.method=='post':
-        form=DocumentForm(request.POST, user=request.user)
+    if request.method == 'post':
+        form = DocumentForm(request.POST, user=request.user)
         if form.is_valid():
             uniquecode = form.cleaned_data.get('unique_code')
             user_defined_code = form.cleaned_data.get('user_defined_code')
@@ -44,8 +46,8 @@ def exm(request):
             doc.save()
             return HttpResponse('success')
     else:
-        form=DocumentForm(user=request.user)
+        form = DocumentForm(user=request.user)
 
-    context = { 'form':form, }
+    context = {'form': form, }
 
     return render_to_response('demo/exm.html', context, context_instance=RequestContext(request))
