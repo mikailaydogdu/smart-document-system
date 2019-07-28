@@ -1,8 +1,16 @@
 from django.conf import settings
 from django.db import models
 
-from SDS.myFuncitons import Kodlar
-from documents.models import MyCodes
+class MyCodes(models.Model):
+    """
+    Kodların tutulduğu table
+    """
+    type = models.CharField(max_length=32, verbose_name='Dokuman Turu')
+    code = models.CharField(max_length=16, verbose_name='Kısa Kodu')
+    title = models.CharField(max_length=32, verbose_name='Kod Açıklaması')
+
+    def __str__(self):
+        return self.title
 
 
 class Article(models.Model):

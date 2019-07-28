@@ -174,3 +174,6 @@ src/documents/migrations/0005_auto_20190725_1456.py
 src/documents/migrations/__pycache__/
 src/uploads/documents/2019/07/25/index.jpeg
 src/uploads/documents/2019/07/25/penguin-pair-riggs_530_530_80auto_s.jpg
+src/Article/__pycache__/
+src/Article/migrations/
+src/uploads/
