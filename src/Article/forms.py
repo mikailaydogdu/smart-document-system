@@ -36,6 +36,7 @@ class ArticleUpdateForm(forms.ModelForm):
             article=self.cleaned_data["article"],
             file=self.cleaned_data["file"],
             comment=self.cleaned_data["comment"],
-            uploader=self.request.user
+            uploader=self.request.user,
+            file_sha1=generate_sha(file=self.request.FILES['file'],)
         )
 
