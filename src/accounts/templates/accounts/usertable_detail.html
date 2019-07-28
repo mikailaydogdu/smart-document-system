@@ -1,0 +1,31 @@
+{% extends "base/base.html" %}
+
+{% block title %}
+    Karakter Detay Sayfası
+{% endblock title %}
+
+{% block content %}
+    {% if request.user.is_authenticated %}
+        <h1 style="text-align: center;">
+            Kullanıcı Detayları {% if is_me %} <a class="btn btn-secondary btn-sm" href="{% url "update_profile" %}"><small>Güncelle</small></a>{% endif %}
+        </h1>
+        <p> Kullanıcı adı = {{ user_detail.username }}</p>
+        <p> İsim = {{ user_detail.first_name }}</p>
+        <p> Soyisim = {{ user_detail.last_name }}</p>
+        <p> Son giriş taihi = {{ user_detail.last_login }}</p>
+        <p> Doğum tarihi = {{ user_detail.birth_day }}</p>
+        <p> Telephone = {{ user_detail.telephone }}</p><br>
+        <hr>
+{#        <h1 style="text-align: center">Karakter detayları {% if is_me %}<a class="btn btn-secondary btn-sm" href="{% url "update_character" %}"><small>Güncelle</small></a> {% endif %}#}
+        </h1>
+    {% else %}
+        <div class="jumbotron">
+            <div class="jumbotron text-center">
+                Merhaba stalker!
+            </div>
+        </div>
+
+    {% endif %}
+
+
+{% endblock content %}

@@ -28,11 +28,11 @@ class Documents(models.Model):
     genel bilgilerin bulunduğu table
 
     """
-    choices = Kodlar(MyCodes, 'DOKUMANTYPE')
-    if not choices:
-        choices = [(1, 'veri yok')]
-    else:
-        choices = Kodlar(MyCodes, 'DOKUMANTYPE')
+    # choices = Kodlar(MyCodes, 'DOKUMANTYPE')
+    # if not choices:
+    choices = [(1, 'veri yok')]
+    # else:
+    #     choices = Kodlar(MyCodes, 'DOKUMANTYPE')
 
     kk = models.ManyToManyField(settings.AUTH_USER_MODEL)
     label = models.CharField(max_length=36, verbose_name='Döküman Başlık')
@@ -64,3 +64,6 @@ class DocumentDetails(models.Model):
 
     def __str__(self):
         return self.document.label
+
+
+

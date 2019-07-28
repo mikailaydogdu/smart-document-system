@@ -13,16 +13,15 @@ class File(models.Model):
         return self.file.name
 
 
-
-
-
 class UserDefinedCode(models.Model):
     name = models.CharField(max_length=8)
     owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 
+
 class Code(models.Model):
     user_defined_code = models.ForeignKey(UserDefinedCode, on_delete=models.CASCADE)
     unique_code = models.CharField(max_length=15)
+
 
 class Document(models.Model):
     title = models.CharField(blank=True, null=True, max_length=200)
@@ -32,5 +31,3 @@ class Document(models.Model):
 
 
 # https://www.techiediaries.com/django-rest-image-file-upload-tutorial/
-
-

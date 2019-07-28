@@ -39,7 +39,7 @@ INSTALLED_APPS = [
 
     'corsheaders',
     'rest_framework',
-    'bootstrap3',
+    'bootstrap4',
     'crispy_forms',
     'django_cleanup',
 
@@ -47,6 +47,7 @@ INSTALLED_APPS = [
 
     'documents',
     'accounts',
+    'Article'
 ]
 
 MIDDLEWARE = [
@@ -66,7 +67,7 @@ ROOT_URLCONF = 'SDS.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'DIRS': [os.path.join(BASE_DIR, "templates")],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -126,7 +127,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
-AUTH_USER_MODEL = 'accounts.CustomUser'
+AUTH_USER_MODEL = 'accounts.CustomUserTable'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
@@ -134,11 +135,13 @@ STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
 MEDIA_URL = '/uploads/'
 
-LOGIN_REDIRECT_URL = "home"
-LOGOUT_REDIRECT_URL = 'home'
+
+LOGIN_URL = "/login/"
+LOGIN_REDIRECT_URL = "/accounts/detail/me/"
+LOGOUT_REDIRECT_URL = "/logged_out/"
 
 CORS_ORIGIN_ALLOW_ALL = True
 
-CRISPY_TEMPLATE_PACSK = 'bootstrap3'
+CRISPY_TEMPLATE_PACKS = 'bootstrap4'
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'

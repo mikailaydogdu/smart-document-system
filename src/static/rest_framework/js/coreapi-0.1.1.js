@@ -667,7 +667,7 @@ var HTTPTransport = function () {
           queryParams[field.name] = params[field.name];
         } else if (field.location === 'path') {
           pathParams[field.name] = params[field.name];
-        } else if (field.location === 'form') {
+        } else if (field.location === 'forms.py') {
           formParams[field.name] = params[field.name];
           hasBody = true;
         } else if (field.location === 'body') {

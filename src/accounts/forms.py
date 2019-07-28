@@ -1,13 +1,25 @@
-from django.contrib.auth import get_user_model
+from django import forms
 from django.contrib.auth.forms import UserCreationForm
 
+from accounts.models import CustomUserTable
 
-class UserCreateForm(UserCreationForm):
-    class Meta:
-        fields = ("username", "email", "password1", "password2")
-        model = get_user_model()
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.fields["username"].label = "Display name"
-        self.fields["email"].label = "Email address"
+class RealDateInput(forms.DateInput):
+    input_type = "date"
+
+
+class RegisterForm(UserCreationForm):
+    class Meta(UserCreationForm.Meta):
+        model = CustomUserTable
+        fields = UserCreationForm.Meta.fields + (
+            'ident_no', 'email','first_name','last_name', 'birth_date', 'telephone', 'mobile_tel', 'job', 'task', 'image')
+        widgets = {"birth_date": RealDateInput}
+
+
+
+class UserUpdateForm(forms.ModelForm):
+    class Meta(CustomUserTable.Meta):
+        model = CustomUserTable
+        fields = [
+           'ident_no', 'email','first_name','last_name', 'birth_date', 'telephone', 'mobile_tel', 'job', 'task', 'image'
+        ]

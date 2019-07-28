@@ -1,0 +1,15 @@
+{% extends "base/base.html" %}
+{% block title %}
+    Çıktınız
+{% endblock %}
+{% block content %}
+    Çıktınız.
+    <noscript>Anasayfaya gitmek için <a href="/">tıklayınız</a></noscript>
+{% endblock content %}
+{% block static %}
+    <script>
+        setTimeout(function () {
+            window.location.href = "/"
+        }, 1000)
+    </script>
+{% endblock static %}

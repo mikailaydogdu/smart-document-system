@@ -33,6 +33,8 @@
                 <div class="navbar-nav ml-auto">
                     {% if user.is_authenticated %}
                         <p>{{ request.user.username }}</p>
+                        <a class="nav-item nav-link" href="{% url 'article_add' %}"><span class="oi oi-plus">Döküman Ekle</span></a>
+                        <a class="nav-item nav-link" href="{% url 'article_update' %}"><span class="oi oi-plus">Döküman Güncelle</span></a>
                         <a class="nav-item nav-link" href="{% url 'demo' %}"><span class="oi oi-plus">demo</span></a>
                         <a class="nav-item nav-link" href="{% url 'detail' %}"><span class="oi oi-plus">  Detail</span></a>
                         <a class="nav-item nav-link" href="{% url 'file' %}"><span class="oi oi-plus">  File</span></a>
@@ -43,7 +45,7 @@
                             <input type="hidden"/>
                         </form>
                     {% else %}
-                        <p>Selem Bebeğim</p>
+                        <p>Giriş yapmayı deneyebilirsiniz.</p>
                         <a class="nav-item nav-link" href="{% url 'signup' %}">Sign Up</a>
                         <a class="nav-item nav-link" href="{% url 'login' %}">Login</a>
                     {% endif %}
@@ -70,6 +72,7 @@
 
 
     {% block content %}
+
     {% endblock %}
 
 </div>

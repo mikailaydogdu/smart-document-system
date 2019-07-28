@@ -1,0 +1,17 @@
+{% extends "base/base.html" %}
+{% load bootstrap4 %}
+{% block title %}
+    Register
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-4 offset-md-4">
+            <form method="POST">
+                {% csrf_token %}
+                {% bootstrap_form form %}
+                {% bootstrap_button content="Kayıt Ol" button_type="submit" button_class="btn-primary btn-block" %}
+            </form>
+        </div>
+    </div>
+{% endblock content%}

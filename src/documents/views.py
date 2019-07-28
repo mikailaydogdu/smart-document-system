@@ -35,7 +35,7 @@ def filex(request):
             file_sha1=generate_sha(request.FILES['file'], )
         )
         user = request.user.id
-        print(request.user.id)
+        # print(request.user.id)
         form.kk = user
         form.save(commit=True)
         user = request.POST.get('user')

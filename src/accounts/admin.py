@@ -2,13 +2,13 @@ from django.contrib import admin
 
 from django.contrib.auth.admin import UserAdmin
 
-from accounts.models import CustomUser
+from accounts.models import CustomUserTable
 
 
-@admin.register(CustomUser)
+@admin.register(CustomUserTable)
 class UserTable(UserAdmin):
     fieldsets = UserAdmin.fieldsets + (
         ('Custom Fields',
-         {'fields': ('birth_date', 'telephone', 'image', 'follow')}
+         {'fields': ('ident_no','birth_date', 'telephone','mobile_tel', 'image','job','task' )}
          ),
     )
