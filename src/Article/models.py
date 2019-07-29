@@ -1,3 +1,5 @@
+import hashlib
+
 from django.conf import settings
 from django.db import models
 
@@ -39,7 +41,8 @@ class Revisions(models.Model):
     date = models.DateTimeField(auto_now_add=True, verbose_name='Oluşturma Tarihi')
 
     def __str__(self):
-        return self.article.title
+        return self.comment
+
 
 
 class Author(models.Model):

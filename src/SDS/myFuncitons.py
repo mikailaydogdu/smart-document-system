@@ -20,3 +20,15 @@ def generate_sha(file):
     sha1 = sha.hexdigest()
     file.seek(0)
     return sha1
+
+def generate_md5(file):
+    md5 = hashlib.md5()
+    file.seek(0)
+    while True:
+        buf = file.read(104857600)
+        if not buf:
+            break
+        md5.update(buf)
+    md5 = md5.hexdigest()
+    file.seek(0)
+    return md5

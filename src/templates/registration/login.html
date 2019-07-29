@@ -1,17 +1,43 @@
 {% extends "base/base.html" %}
 {% load bootstrap4 %}
+{% load crispy_forms_tags %}
 {% block title %}
     Login
 {% endblock %}
 
 {% block content %}
-    <div class="row">
-        <div class="col-md-4 offset-md-4">
-            <form method="POST">
-                {% csrf_token %}
-                {% bootstrap_form form %}
-                {% bootstrap_button content="Gir" button_type="submit" button_class="btn-primary btn-block" %}
-            </form>
-        </div>
-    </div>
-{% endblock %}
+{#    <div class="row">#}
+{#        <div class="col-md-4 offset-md-4">#}
+{#            <form method="POST">#}
+{#                {% csrf_token %}#}
+{#                {% bootstrap_form form %}#}
+{#                {% bootstrap_button content="Gir" button_type="submit" button_class="btn-primary btn-block" %}#}
+{#            </form>#}
+{#        </div>#}
+{#    </div>#}
+{#{% endblock %}#}
+
+ <div class="row justify-content-center" style="padding-top: 1rem"">
+     <div class="col-md-3">
+         <div class="card">
+             <div class="card-header text-center">Login</div>
+             <div class="card-body">
+                 <form method="POST">
+                     {% csrf_token %}
+                     <div class="form-row">
+                         <div class="form-group col-md-12">
+
+                            {% bootstrap_form form %}
+{#                           {% crispy form %}#}
+
+                         </div>
+                     </div>
+                     <div class="">
+                        <button type="submit" class="btn btn-primary float-right">Sign in</button>
+                 </div>
+                 </form>
+             </div>
+         </div>
+     </div>
+ </div>
+{% endblock content%}

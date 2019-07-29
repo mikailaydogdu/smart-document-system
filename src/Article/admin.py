@@ -9,6 +9,7 @@ class ArticleAdmin(admin.ModelAdmin):
     search_fields = ['title', 'type']
     list_filter = ['title']
 
+
     class Meta:
         model = Article
 

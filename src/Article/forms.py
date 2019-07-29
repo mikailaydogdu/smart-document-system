@@ -1,7 +1,7 @@
 from django import forms
 
 from Article.models import Revisions, Article
-from SDS.myFuncitons import generate_sha
+from SDS.myFuncitons import generate_md5
 
 
 class ArticleAddForm(forms.ModelForm):
@@ -21,10 +21,16 @@ class ArticleUpdateForm(forms.ModelForm):
         model = Revisions
         fields = ['article', 'file', 'comment']
 
+        labels = {
+            'article': ('Dosya Tanımı'),
+            'file': ('Dosya'),
+            'comment': ('Açıklama'),
+        }
+
     def clean(self):
         file = self.cleaned_data.get('file')
-        sha1 = generate_sha(file)
-        if Revisions.objects.filter(file_sha1=sha1).exists():
+        md5 = generate_md5(file)
+        if Revisions.objects.filter(file_sha1=md5).exists():
             raise forms.ValidationError('Eklemeye Çalıştığınız Argüman sistemde mevcut')
         # TODO: sistemde bulunan dosya bilgisi verilecek
         if not file:
@@ -37,6 +43,5 @@ class ArticleUpdateForm(forms.ModelForm):
             file=self.cleaned_data["file"],
             comment=self.cleaned_data["comment"],
             uploader=self.request.user,
-            file_sha1=generate_sha(file=self.request.FILES['file'],)
+            file_sha1=generate_md5(file=self.request.FILES['file'], )
         )
-

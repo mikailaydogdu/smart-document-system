@@ -1,15 +1,25 @@
 {% extends "base/base.html" %}
 {% load bootstrap4 %}
 
+{##}
+{#{% block content %}#}
+{##}
+{#    <div class="container" align="center">#}
+{#        <h1>Belge Listesi</h1>#}
+{#        {% for i in qm %}#}
+{#            <div align="left">#}
+{#              <p>{{ i.label }} - {{ i.type }} - {{ i.comment }} - {{ i.active }}</p>#}
+{#            </div>#}
+{#        {% endfor %}#}
+{#    </div>#}
+{#{% endblock %}#}
 
 {% block content %}
 
-    <div class="container" align="center">
-        <h1>Belge Listesi</h1>
-        {% for i in qm %}
-            <div align="left">
-              <p>{{ i.label }} - {{ i.type }} - {{ i.comment }} - {{ i.active }}</p>
-            </div>
-        {% endfor %}
-    </div>
+    {% for i in object_list %}
+
+        {{ i.label }} - {{ i.type }} - {{ i.comment }} - {{ i.active }}
+
+    {% endfor %}
+
 {% endblock %}

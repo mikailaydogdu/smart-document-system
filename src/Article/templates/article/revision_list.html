@@ -1,0 +1,34 @@
+{% extends "base/base.html" %}
+
+{% load bootstrap4 %}
+
+
+{% block content %}
+    <div class="container">
+    <p>revision_list</p>
+    <div class="align-left">
+{#    <a class="btn btn-success btn-sm" href="{% url '' %} }">Ekle</a><br><br>#}
+
+    <table class="table fa-border">
+        <tr>
+            <th>Sıra No </th>
+            <th>Adı</th>
+            <th>Tarih</th>
+            <th>Açıklama</th>
+            <th>Benzersiz No</th>
+        </tr>
+        {% for i in qs_2%}
+
+        <tr>
+            <td>{{ i.id }}</td>
+            <td>{{ i.article }}</td>
+            <td>{{ i.date }}</td>
+            <td>{{ i.comment }}</td>
+            <td>{{ i.file_sha1 }}</td>
+{#            <td><a class="btn btn-secondary btn-sm" href="{% url "article-detail" i.pk%}">Detay</a></td>#}
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+    </div>
+{% endblock %}
