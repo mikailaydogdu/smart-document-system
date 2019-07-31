@@ -9,7 +9,7 @@ class RegisterView(CreateView):
     form_class = RegisterForm
     model = CustomUserTable
     template_name = 'accounts/usertable_form.html'
-    success_url = "/admin"
+    success_url = reverse_lazy("anasayfa")
 
 
 class UserUpdateView(LoginRequiredMixin, UpdateView):

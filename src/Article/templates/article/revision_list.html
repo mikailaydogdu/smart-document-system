@@ -17,17 +17,18 @@
             <th>Açıklama</th>
             <th>Benzersiz No</th>
         </tr>
-        {% for i in qs_2%}
+        {% for i in Revision_list %}
 
         <tr>
-            <td>{{ i.id }}</td>
-            <td>{{ i.article }}</td>
+            <td><a href="{% url "revizyonlist" i.pk%}"> {{ i.id }}</a></td>
+            <td><a href="{% url "revizyonlist" i.pk%}"> {{ i.article }}</a></td>
             <td>{{ i.date }}</td>
             <td>{{ i.comment }}</td>
             <td>{{ i.file_sha1 }}</td>
 {#            <td><a class="btn btn-secondary btn-sm" href="{% url "article-detail" i.pk%}">Detay</a></td>#}
         </tr>
-        {% endfor %}
+                {% endfor %}
+{#{% endfor %}#}
     </table>
 </div>
     </div>

@@ -1,7 +1,6 @@
-import hashlib
-
 from django.conf import settings
 from django.db import models
+
 
 class MyCodes(models.Model):
     """
@@ -42,7 +41,6 @@ class Revisions(models.Model):
 
     def __str__(self):
         return self.comment
-
 
 
 class Author(models.Model):
