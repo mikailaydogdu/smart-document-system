@@ -33,7 +33,7 @@ class Revisions(models.Model):
                                 verbose_name='Döküman id', related_name='revision_article')
     uploader = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE,
                                  verbose_name='Döküman Ekleyen', related_name='revision_uploader')
-    file = models.FileField(upload_to='documents/%Y/%m/%d',
+    file = models.FileField(upload_to='document/%Y/%m/%d',
                             verbose_name='Dokuman Path')
     file_sha1 = models.CharField(max_length=32, verbose_name='Benzersiz Kimlik Bilgisi')
     comment = models.TextField(default='dırı vırı ', verbose_name='Dosya Açıklama')
