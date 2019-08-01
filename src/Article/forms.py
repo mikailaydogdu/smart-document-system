@@ -49,3 +49,15 @@ class ArticleItemCreateForm(forms.ModelForm):
             'file': ('Dosya'),
             'comment': ('Açıklama'),
         }
+
+
+
+class PostForm(forms.ModelForm):
+
+    class Meta:
+        model=Revisions
+        fields=[
+            'article',
+            'file',
+            'comment',
+        ]

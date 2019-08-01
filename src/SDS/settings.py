@@ -129,8 +129,12 @@ AUTH_USER_MODEL = 'accounts.CustomUserTable'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'uploadss')
-MEDIA_URL = '/uploadss/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'upload')
+MEDIA_URL = '/upload/'
+
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
 
 
 LOGIN_URL = "/login/"

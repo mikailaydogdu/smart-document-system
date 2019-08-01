@@ -1,13 +1,22 @@
 from django.urls import path
 
 from Article.views import *  #article_update, article_add, ArticleListView, revizyon_list, ArticleAdd
-
+from django.conf.urls.static import static
+from django.conf import settings
 urlpatterns = [
     path('', ArticleListView.as_view(), name='home'),
-    path('revizyondetail/<int:pk>/', ArticleItemListView.as_view(), name='revizyonlist'),
-    path('ekleclass/', ArticleCreateView.as_view(), name='article_add'),
+    # path('revizyondetail/<int:pk>', revizyon_list, name='revizyonlist'),
+    path('revizyondetail/<int:pk>', ArticleItemListView.as_view(), name='revizyonlist'),
+    # path('detail/<int:pk>/    ', ArticleDetailView.as_view(), name='article-detail'),
+    # path('ekle/', article_add, name='article_add'),
+    path('ekleclass/', ArticleCreate.as_view(), name='article_add'),
+    # path('guncelle/', article_update, name='article_update'),
     path('guncelle/', ArticileItemCreate.as_view(), name='article_update'),
+    path('panel/', UserRevisionsListView.as_view(),name='panel'),
+    path('updatefile/<int:id>',updatefile,name='updatefile'),
 
-    path('revizyondetail/<int:pk>/ekle/', ArticileItemCreate.as_view(), name='article_item_add'),
-    # path('revizyondetail/<int:pk>/add/', ItemCreate.as_view(), name='revizyonekle'),
 ]
+
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
