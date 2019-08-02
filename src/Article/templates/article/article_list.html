@@ -24,17 +24,7 @@
                             <td>{{ i.active }}</td>
                             <td><a class="btn btn-secondary btn-sm" href="{% url "revizyonlist" i.id %}">Detay</a></td>
                         </tr>
-{#                        {% elif not i.active %}#}
-{#                            <tr>#}
-{#                            <td>{{ i.id }}</td>#}
-{#                            <td>{{ i.title }}</td>#}
-{#                            <td>{{ i.active }}</td>#}
-{#                            <td><a class="btn btn-secondary btn-sm" href="{% url "revizyonlist" i.id %}">Detay</a></td>#}
-{#                        {% else i.active or not i.active%}#}
-{#                            <td>{{ i.id }}</td>#}
-{#                            <td>{{ i.title }}</td>#}
-{#                            <td>{{ i.active }}</td>#}
-{#                            <td><a class="btn btn-secondary btn-sm" href="{% url "revizyonlist" i.id %}">Detay</a></td>#}
+                        <td><a class="btn btn-secondary btn-sm" href="{% url "revizyonlist" i.id %}">Detay</a></td>#}
 
   {% endfor %}
             </table>

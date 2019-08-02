@@ -30,14 +30,14 @@ class ArticleItemCreateForm(forms.ModelForm):
 
     def save(self, commit=True):
         model = self.Meta.model
-        x = model.objects.create(
+        create = model.objects.create(
             article_id=self.article_id,
             file=self.cleaned_data["file"],
             comment=self.cleaned_data["comment"],
             uploader=self.request.user,
             file_sha1=generate_md5(file=self.cleaned_data["file"].open())
         )
-        return x
+        return create
 
     class Meta:
         model = Revisions
