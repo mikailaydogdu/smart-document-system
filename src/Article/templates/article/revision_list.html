@@ -9,17 +9,12 @@
     <div class="align-left">
 
 
-{#    {{ Revision_list.values_list }}#}
 
-{% if Revision_list.values_list.1.1 %}
-<a class="btn btn-success btn-sm actions" href="{% url 'article_item_add' pk=Revision_list.values_list.1.1  %}">Ekle</a><br><br>
-    {% else %}
-    <a class="btn btn-success btn-sm actions" href="{% url 'article_item_add' pk=article_id %}">Ekle</a><br><br>
-{% endif %}
-
+{#{% if Revision_list.values_list.1.1 %}#}
 {#<a class="btn btn-success btn-sm actions" href="{% url 'article_item_add' pk=Revision_list.values_list.1.1  %}">Ekle</a><br><br>#}
-
-{#<a class="btn btn-success btn-sm actions" href="{% url 'article_item_add' pk=  %}">Ekle</a><br><br>#}
+{#    {% else %}#}
+    <a class="btn btn-success btn-sm actions" href="{% url 'article_item_add' pk=article_id %}">Ekle</a><br><br>
+{#{% endif %}#}
 
 
     <table class="table fa-border">
@@ -43,10 +38,8 @@
             <td>{{ i.comment }}</td>
             <td>{{ i.file_sha1 }}</td>
             <td><a class="btn btn-secondary btn-sm" href="{% url "detail" i.id%}">Detay</a></td>
-{#            <td><a class="btn btn-secondary btn-sm" href="{% url "article_item_add" i.article_id%}">Revizyon Ekle</a></td>#}
         </tr>
                 {% endfor %}
-    {#{% endfor %}#}
     </table>
 </div>
     </div>
