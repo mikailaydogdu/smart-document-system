@@ -64,7 +64,13 @@
 
 
     <!-- Button trigger modal -->
-
+<style>
+.resp-container {
+    position: relative;
+    overflow: hidden;
+    padding-top: 56.25%;
+}
+</style>
 
 <!-- Modal -->
 <div style="height: 100%; width: 100%" class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -77,7 +83,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <iframe style="width:480px; height: 640px;" class="card-img-bottom" src="{{ object.file.url }}"></iframe>
+        <iframe style="width:480px; height: 640px;" class="resp-iframe" src="{{ object.file.url }}"></iframe>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

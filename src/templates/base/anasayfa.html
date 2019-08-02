@@ -11,6 +11,16 @@
             Merhaba, {{ request.user.username }}
 
 
+            <p>
+            <li>Kalite Yönetim Sistemi Destekler Bir proje olacak</li>
+            <li>Firma intranetine entegre olarak çalışabilecek</li>
+            <li>Api sistemi geliştirilerek Kişiye yönelik uygulamalarda mobil cihazaradan bulunan kişisel dosyaları
+            tekrar etmeden kendi belirleyeceği özgür depolama alanı imkanı sunmak </li>
+            <li>OCR(Optical Character Recognition) servisi eklenecek</li>
+            <li>Kişisel uygulamalarda paylaşmak istedği dökümanı kamu, grup yada kişisel bazda paylaşıma olanak vermek</li>
+            </p>
+
+
 {#            <br>#}
 {#            Çıkış yapmak için <a href="{% url "logout" %}">tıklayınız</a>.#}
         </p>
@@ -19,5 +29,7 @@
 {#        <p>#}
 {#            Giriş yapmak için <a href="{% url 'login' %}">tıklayınız</a>.#}
 {#        </p>#}
+
+
     {% endif %}
 {% endblock content%}

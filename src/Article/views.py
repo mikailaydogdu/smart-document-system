@@ -12,12 +12,9 @@ class ArticleListView(LoginRequiredMixin, ListView):
     paginate_by = 100
     template_name = "article/article_list.html"
 
-    def get_context_data(self, **kwargs):
-        kwargs = super().get_context_data()
-        kwargs.update({
-            'Revision_list': Revisions.objects.filter(article__active=False), })
-        return kwargs
-
+    def get_queryset(self):
+        queryset=self.model.objects.filter(active=True)
+        return queryset
 
 
 
@@ -32,10 +29,11 @@ class ArticleItemListView(LoginRequiredMixin, ListView):
     template_name = 'article/revision_list.html'
 
     def get_context_data(self, **kwargs):
-        kwargs = super().get_context_data()
-        kwargs.update({
-            'Revision_list': Revisions.objects.filter(article_id=self.kwargs['pk']), })
-        return kwargs
+        context = super(ArticleItemListView, self).get_context_data(**kwargs)
+        context.update({
+            'Revision_list': Revisions.objects.filter(article_id=self.kwargs['pk']),})
+        context['article_id']=self.kwargs['pk']
+        return context
 
 
 class ArticileItemCreate(LoginRequiredMixin, CreateView):
@@ -55,9 +53,6 @@ class ArticleDetailView(LoginRequiredMixin, DetailView):
     model = Revisions
     template_name = "article/detail.html"
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        return context
 
 
 class ArticleSearchView(ListView):

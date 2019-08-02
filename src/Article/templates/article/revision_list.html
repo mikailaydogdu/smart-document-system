@@ -11,26 +11,34 @@
 
 {#    {{ Revision_list.values_list }}#}
 
-
-
+{% if Revision_list.values_list.1.1 %}
 <a class="btn btn-success btn-sm actions" href="{% url 'article_item_add' pk=Revision_list.values_list.1.1  %}">Ekle</a><br><br>
+    {% else %}
+    <a class="btn btn-success btn-sm actions" href="{% url 'article_item_add' pk=article_id %}">Ekle</a><br><br>
+{% endif %}
+
+{#<a class="btn btn-success btn-sm actions" href="{% url 'article_item_add' pk=Revision_list.values_list.1.1  %}">Ekle</a><br><br>#}
+
+{#<a class="btn btn-success btn-sm actions" href="{% url 'article_item_add' pk=  %}">Ekle</a><br><br>#}
 
 
     <table class="table fa-border">
         <tr>
             <th>Sıra No </th>
             <th>Adı</th>
+            <th>Type</th>
             <th>Tarih</th>
             <th>Açıklama</th>
             <th>Benzersiz No</th>
             <th>Detay Bilgisi</th>
 {#            <th>Revizyon Ekle</th>#}
         </tr>
-        {% for i in Revision_list.values %}
+        {% for i in Revision_list %}
 
         <tr>
             <td>{{ i.id }}</td>
             <td>{{ i.article }}</td>
+            <td>{{ i.article.type }}</td>
             <td>{{ i.date }}</td>
             <td>{{ i.comment }}</td>
             <td>{{ i.file_sha1 }}</td>
@@ -38,7 +46,7 @@
 {#            <td><a class="btn btn-secondary btn-sm" href="{% url "article_item_add" i.article_id%}">Revizyon Ekle</a></td>#}
         </tr>
                 {% endfor %}
-{#{% endfor %}#}
+    {#{% endfor %}#}
     </table>
 </div>
     </div>
