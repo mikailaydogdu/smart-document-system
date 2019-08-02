@@ -9,13 +9,15 @@
     {% if request.user.is_authenticated %}
         <p>
             Merhaba, {{ request.user.username }}
-            <br>
-            Çıkış yapmak için <a href="{% url "logout" %}">tıklayınız</a>.
+
+
+{#            <br>#}
+{#            Çıkış yapmak için <a href="{% url "logout" %}">tıklayınız</a>.#}
         </p>
-    {% else %}
-        Kayıt olmak için <a href="{% url 'signup' %}">tıklayınız</a>.
-        <p>
-            Giriş yapmak için <a href="{% url 'login' %}">tıklayınız</a>.
-        </p>
+{#    {% else %}#}
+{#        Kayıt olmak için <a href="{% url 'signup' %}">tıklayınız</a>.#}
+{#        <p>#}
+{#            Giriş yapmak için <a href="{% url 'login' %}">tıklayınız</a>.#}
+{#        </p>#}
     {% endif %}
 {% endblock content%}

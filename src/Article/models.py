@@ -1,6 +1,8 @@
 from django.conf import settings
 from django.db import models
 
+from SDS.myFuncitons import Kodlar
+
 
 class MyCodes(models.Model):
     """
@@ -15,11 +17,11 @@ class MyCodes(models.Model):
 
 
 class Article(models.Model):
-    # choices = Kodlar(MyCodes, 'DOKUMANTYPE')
-    # if not choices:
-    choices = [(1, 'veri yok')]
-    # else:
-    #     choices = Kodlar(MyCodes, 'DOKUMANTYPE')
+    choices = Kodlar(MyCodes, 'DOKUMANTYPE')
+    if not choices:
+        choices = [(1, 'veri yok')]
+    else:
+        choices = Kodlar(MyCodes, 'DOKUMANTYPE')
     title = models.CharField(max_length=32, null=False, blank=False, verbose_name='Dosya Adı')
     type = models.IntegerField(null=True, blank=True, choices=choices, verbose_name='Dosta Türü')
     active = models.BooleanField(default=True, verbose_name='Aktif/Pasif')

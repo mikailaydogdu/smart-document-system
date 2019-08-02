@@ -9,7 +9,8 @@ class ArticleCreateForm(forms.ModelForm):
 
     class Meta:
         model = Article
-        fields = ['title', 'active', 'auth_name']
+        fields = ['title', 'type', 'active', 'auth_name']
+        # fields = '__all__'
 
 
 class ArticleItemCreateForm(forms.ModelForm):
@@ -40,56 +41,5 @@ class ArticleItemCreateForm(forms.ModelForm):
 
     class Meta:
         model = Revisions
-        fields = ['file', 'comment']
-        labels = {
-            'article': ('Dosya Tanımı'),
-            'file': ('Dosya'),
-            'comment': ('Açıklama'),
-        }
-
-
-
-
-
-
-
-
-
-
-
-#
-#
-# class ArticleItemCreateForm(forms.ModelForm):
-#     def __init__(self, *args, **kwargs):
-#         self.request = kwargs.pop('request')
-#         self.article_id = kwargs.pop('article_id')
-#         super(ArticleItemCreateForm, self).__init__(*args, **kwargs)
-#
-#     def clean(self):
-#         file = self.cleaned_data.get('file')
-#         md5 = generate_md5(file)
-#         if Revisions.objects.filter(file_sha1=md5).exists():
-#             raise forms.ValidationError('Eklemeye Çalıştığınız dosya istemde mevcut')
-#         # TODO: sistemde bulunan dosya bilgisi verilecek
-#         if not file:
-#             raise forms.ValidationError('Lütfen dosya ekini ekleyiniz.')
-#
-#     def save(self, commit=True):
-#         model = self.Meta.model
-#         x = model.objects.create(
-#             article_id=self.article_id,
-#             file=self.cleaned_data["file"],
-#             comment=self.cleaned_data["comment"],
-#             uploader=self.request.user,
-#             file_sha1=generate_md5(file=self.cleaned_data["file"].open())
-#         )
-#         return x
-#
-#     class Meta:
-#         model = Revisions
-#         fields = ['file', 'comment']
-#         labels = {
-#             'article': ('Dosya Tanımı'),
-#             'file': ('Dosya'),
-#             'comment': ('Açıklama'),
-#         }
+        fields = ['file','comment']
+        labels = dict(file=('Dosya'), comment=('Açıklama'))

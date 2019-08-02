@@ -5,26 +5,26 @@
 
 {% block content %}
     <div class="container">
-    <p>Belge Listesi- A-L</p>
-    <div class="align-left">
+        <p>Belge Listesi- A-L</p>
+        <div class="align-left">
 
-    <table class="table fa-border">
-        <tr>
-            <th>Sıra No </th>
-            <th>Adı</th>
-            <th>Aktif</th>
-            <th>Detay</th>
-        </tr>
+            <table class="table fa-border">
+                <tr>
+                    <th>Sıra No</th>
+                    <th>Adı</th>
+                    <th>Aktif</th>
+                    <th>Detay</th>
+                </tr>
 
-        {% for i in object_list %}
-        <tr>
-            <td>{{ i.id }}</td>
-            <td>{{ i.title }}</td>
-            <td>{{ i.active }}</td>
-            <td><a class="btn btn-secondary btn-sm" href="{% url "revizyonlist" i.id%}">Detay</a></td>
-        </tr>
-        {% endfor %}
-    </table>
-</div>
+                {% for i in object_list %}
+                    <tr>
+                        <td>{{ i.id }}</td>
+                        <td>{{ i.title }}</td>
+                        <td>{{ i.active }}</td>
+                        <td><a class="btn btn-secondary btn-sm" href="{% url "revizyonlist" i.id %}">Detay</a></td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
     </div>
 {% endblock %}

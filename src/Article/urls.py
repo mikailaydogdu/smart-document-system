@@ -4,7 +4,6 @@ from django.views.static import serve
 
 from Article.views import *
 
-
 urlpatterns = [
     path('', ArticleListView.as_view(), name='home'),
     path('ekleclass/', ArticleCreateView.as_view(), name='article_add'),
