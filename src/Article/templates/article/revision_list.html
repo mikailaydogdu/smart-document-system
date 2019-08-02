@@ -9,8 +9,12 @@
     <div class="align-left">
 
 
+{#    {{ Revision_list.values_list }}#}
 
-    <a class="btn btn-success btn-sm" href="{% url 'article_item_add' pk=1  %}">Ekle</a><br><br>
+
+
+<a class="btn btn-success btn-sm actions" href="{% url 'article_item_add' pk=Revision_list.values_list.1.1  %}">Ekle</a><br><br>
+
 
     <table class="table fa-border">
         <tr>
@@ -19,16 +23,19 @@
             <th>Tarih</th>
             <th>Açıklama</th>
             <th>Benzersiz No</th>
+            <th>Detay Bilgisi</th>
+{#            <th>Revizyon Ekle</th>#}
         </tr>
-        {% for i in Revision_list %}
+        {% for i in Revision_list.values %}
 
         <tr>
-            <td><a href="{% url "revizyonlist" i.pk%}"> {{ i.id }}</a></td>
-            <td><a href="{% url "revizyonlist" i.pk%}"> {{ i.article }}</a></td>
+            <td>{{ i.id }}</td>
+            <td>{{ i.article }}</td>
             <td>{{ i.date }}</td>
             <td>{{ i.comment }}</td>
             <td>{{ i.file_sha1 }}</td>
-{#            <td><a class="btn btn-secondary btn-sm" href="{% url "article-detail" i.pk%}">Detay</a></td>#}
+            <td><a class="btn btn-secondary btn-sm" href="{% url "detail" i.id%}">Detay</a></td>
+{#            <td><a class="btn btn-secondary btn-sm" href="{% url "article_item_add" i.article_id%}">Revizyon Ekle</a></td>#}
         </tr>
                 {% endfor %}
 {#{% endfor %}#}

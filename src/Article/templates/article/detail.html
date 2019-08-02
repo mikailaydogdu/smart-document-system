@@ -8,39 +8,54 @@
 {#    <input type="text" value="{{ revisions.file }}"/>#}
 {#   <input type="file" value="{{ revisions.file }}"/><br>#}
 {#   <input type="text" value="{{ revisions.uploader }}"/><br>#}
-    <br>
+{#    <br>#}
 {#    <a class="btn btn-success" href="{% url "article_add"%}">Ekle</a>#}
 {#    <a class="btn btn-info" href="{% url "article-detail" pk=revisions.id%}">Güncelle</a>#}
 {#    <a class="btn btn-danger" href="{% url "article-detail" pk=revisions.id%}">sil</a>#}
-    <br>
-    <table class="table fa-border">
-        <tr>
-            <th>Sıra No </th>
-            <th>Adı</th>
-            <th>Türü</th>
-            <th>Açıklama</th>
-            <th>Oluşturma Tarihi</th>
-            <th></th>
-            {% for revision in revisions %}
-
-            {{ revision.article_id }}
-           {{ revision.article }}
-            {{ revision.comment }}
-            {% endfor %}
-
-        </tr>
-        {% for i in object_list %}
-
-        <tr>
-            <td>{{ i }}</td>
-            <td>{{ i.id }}</td>
-            <td>{{ i.article.title }}</td>
-            <td>{{ i.article.type }}</td>
-            <td>{{ i.comment }}</td>
-            <td>{{ i.date }}</td>
+{#    <br>#}
+{#    <table class="table fa-border">#}
+{#        <tr>#}
+{#            <th>Sıra No </th>#}
+{#            <th>Adı</th>#}
+{#            <th>Türü</th>#}
+{#            <th>Açıklama</th>#}
+{#            <th>Oluşturma Tarihi</th>#}
+{#            <th></th>#}
+{#            {% for revision in revisions %}#}
+{##}
+{#            {{ revision.article_id }}#}
+{#           {{ revision.article }}#}
+{#            {{ revision.comment }}#}
+{#            {% endfor %}#}
+{##}
+{#        </tr>#}
+{#        {% for i in object_list %}#}
+{##}
+{#        <tr>#}
+{#            <td>{{ i }}</td>#}
+{#            <td>{{ i.id }}</td>#}
+{#            <td>{{ i.article.title }}</td>#}
+{#            <td>{{ i.article.type }}</td>#}
+{#            <td>{{ i.comment }}</td>#}
+{#            <td>{{ i.date }}</td>#}
 {#            <td><a class="btn btn-secondary btn-sm" href="{% url "" i.pk%}">Detay</a></td>#}
-        </tr>
-        {% endfor %}
-    </table>
+{#        </tr>#}
+{#        {% endfor %}#}
+{#    </table>#}
+{##}
+{#{% endblock %}#}
+
+    <h3>Detay Bilgi</h3>
+    <hr>
+    <p>ID - {{ object.id}}</p>
+    <p>Belge Adı - {{ object.article }}</p>
+    <p>Açıklama - {{ object.comment }}</p>
+    <p>Ekleyen  - {{ object.uploader }}</p>
+    <p>Ekleme Tarihi - {{ object.date }}</p>
+    <p>Dosya Bilgisi - {{ object.file }}</p>
+    <p>Benzersiz No - {{ object.file_sha1 }}</p>
+    <p><img class="card-img-bottom" src="{{ object.file.url }}"></p>
+    <hr>
+
 
 {% endblock %}

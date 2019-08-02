@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
+    # 'django_tables2',
 
     'corsheaders',
     'rest_framework',
@@ -132,13 +133,14 @@ STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'upload')
 MEDIA_URL = '/upload/'
 
-
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-MEDIA_URL = '/media/'
+#
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+# MEDIA_URL = '/media/'
 
 
 LOGIN_URL = "/login/"
-LOGIN_REDIRECT_URL = "/accounts/detail/me/"
+# LOGIN_REDIRECT_URL = "/accounts/detail/me/"
+LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = "/logged_out/"
 
 CORS_ORIGIN_ALLOW_ALL = True
@@ -146,3 +148,5 @@ CORS_ORIGIN_ALLOW_ALL = True
 CRISPY_TEMPLATE_PACKS = 'bootstrap4'
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+# DJANGO_TABLES2_TEMPLATE = "django_tables2/bootstrap4.html"

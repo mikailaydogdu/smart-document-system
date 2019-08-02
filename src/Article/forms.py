@@ -16,7 +16,7 @@ class ArticleItemCreateForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         self.request = kwargs.pop('request')
         self.article_id = kwargs.pop('article_id')
-        super(ArticleItemCreateForm,self).__init__(*args, **kwargs)
+        super(ArticleItemCreateForm, self).__init__(*args, **kwargs)
 
     def clean(self):
         file = self.cleaned_data.get('file')
@@ -36,13 +36,10 @@ class ArticleItemCreateForm(forms.ModelForm):
             uploader=self.request.user,
             file_sha1=generate_md5(file=self.cleaned_data["file"].open())
         )
-        print(x.article)
         return x
 
     class Meta:
         model = Revisions
-        # fields = ['article', 'file', 'comment']
-        # fields = ['article','file', 'comment']
         fields = ['file', 'comment']
         labels = {
             'article': ('Dosya Tanımı'),
@@ -52,12 +49,47 @@ class ArticleItemCreateForm(forms.ModelForm):
 
 
 
-class PostForm(forms.ModelForm):
 
-    class Meta:
-        model=Revisions
-        fields=[
-            'article',
-            'file',
-            'comment',
-        ]
+
+
+
+
+
+
+
+#
+#
+# class ArticleItemCreateForm(forms.ModelForm):
+#     def __init__(self, *args, **kwargs):
+#         self.request = kwargs.pop('request')
+#         self.article_id = kwargs.pop('article_id')
+#         super(ArticleItemCreateForm, self).__init__(*args, **kwargs)
+#
+#     def clean(self):
+#         file = self.cleaned_data.get('file')
+#         md5 = generate_md5(file)
+#         if Revisions.objects.filter(file_sha1=md5).exists():
+#             raise forms.ValidationError('Eklemeye Çalıştığınız dosya istemde mevcut')
+#         # TODO: sistemde bulunan dosya bilgisi verilecek
+#         if not file:
+#             raise forms.ValidationError('Lütfen dosya ekini ekleyiniz.')
+#
+#     def save(self, commit=True):
+#         model = self.Meta.model
+#         x = model.objects.create(
+#             article_id=self.article_id,
+#             file=self.cleaned_data["file"],
+#             comment=self.cleaned_data["comment"],
+#             uploader=self.request.user,
+#             file_sha1=generate_md5(file=self.cleaned_data["file"].open())
+#         )
+#         return x
+#
+#     class Meta:
+#         model = Revisions
+#         fields = ['file', 'comment']
+#         labels = {
+#             'article': ('Dosya Tanımı'),
+#             'file': ('Dosya'),
+#             'comment': ('Açıklama'),
+#         }

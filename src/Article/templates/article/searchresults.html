@@ -1,0 +1,36 @@
+{% extends "base/base.html" %}
+
+{% load bootstrap4 %}
+
+
+{% block content %}
+    <div class="container">
+    <p>revision_list</p>
+    <div class="align-left">
+
+
+    <table class="table fa-border">
+        <tr>
+            <th>Sıra No </th>
+            <th>Adı</th>
+            <th>Tarih</th>
+            <th>Açıklama</th>
+            <th>Benzersiz No</th>
+            <th>Detay Bilgisi</th>
+        </tr>
+        {% for i in revisions_list %}
+
+        <tr>
+            <td>{{ i.pk }} -</td>
+            <td>{{ i.article}}</td>
+            <td>{{ i.file }}</td>
+            <td>{{ i.comment}}</td>
+            <td>{{ i.file_sha1 }}</td>
+            <td><a class="btn btn-secondary btn-sm" href="{% url "detail" pk=i.id%}">Detay Bilgisi</a></td>
+
+        </tr>
+                {% endfor %}
+    </table>
+</div>
+    </div>
+{% endblock %}

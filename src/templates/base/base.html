@@ -21,7 +21,7 @@
 <header>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
-            <a class="navbar-brand" href="{% url 'home' %}">
+            <a class="navbar-brand" href="{% url 'anasayfa' %}">
                 <img src="{% static 'logo.png' %}" height=30 width=30 class="d-inline-block alighn-top"/>
                 SDS
             </a>
@@ -31,40 +31,28 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav ml-auto">
-
-
-{% if user.is_authenticated %}
-<div class="dropdown">
-<a class="btn dropdown-toggle"  id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-<span class="oi oi-person"></span>
-</a>
-<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-    <a class="nav-item nav-link" href="{% url 'panel' %}">USER PANEL</a>
-    <hr>
-<a  class="nav-item nav-link" href="javascript:{document.getElementById('logout').submit()}" onclick="">Logout</a>
-<form id="logout" method="POST" action="{% url 'logout' %}">
-{% csrf_token %}
-<input type="hidden"/>
-</form>
-
-{% else %}
-<a class="nav-item nav-link" href="{% url 'signup' %}">Sign Up</a>
-<a class="nav-item nav-link" href="{% url 'login' %}">Login</a>
-{% endif %}
-  </div>
-</div>
-
-
-
-                        <a class="nav-item nav-link" href="{% url 'home' %}">Article</a>
-                        <a class="nav-item nav-link" href="{% url 'article_add' %}" ><span class="oi oi-plus">Klasör Ekle</span></a>
-                        <a class="nav-item nav-link" href="{% url 'article_update' %}"><span class="oi oi-plus">Dosya Ekle</span></a>
+                    {% if user.is_authenticated %}
+{#                        <p>{{ request.user.username }}</p>#}
+                        <a class="nav-item nav-link" href="{% url 'article_add' %}"><span class="oi oi-plus">Klasör Ekle</span></a>
+                        <a class="nav-item nav-link" href="{% url 'home' %}"><span class="">Dosya Listesi</span></a>
 {#                        <a class="nav-item nav-link" href="{% url 'demo' %}"><span class="oi oi-plus">demo</span></a>#}
 {#                        <a class="nav-item nav-link" href="{% url 'detail' %}"><span class="oi oi-plus">  Detail</span></a>#}
 {#                        <a class="nav-item nav-link" href="{% url 'file' %}"><span class="oi oi-plus">  File</span></a>#}
-
-
-
+                        <a class="nav-item nav-link" href="javascript:{document.getElementById('logout').submit()}"
+                           onclick="">Logout</a>
+                        <form id="logout" method="POST" action="{% url 'logout' %} ">
+                            {% csrf_token %}
+                            <input type="hidden"/>
+                        </form>
+                        <form action="{% url "search" %}" method="get" class="form-inline my-2 my-lg-0">
+                            <input class="form-control mr-sm-2" name="q" type="search" placeholder="Search" aria-label="Search">
+                            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+                    {% else %}
+                        <p>Giriş yapmayı deneyebilirsiniz.</p>
+                        <a class="nav-item nav-link" href="{% url 'signup' %}">Sign Up</a>
+                        <a class="nav-item nav-link" href="{% url 'login' %}">Login</a>
+                    {% endif %}
                 </div>
             </div>
         </div>
