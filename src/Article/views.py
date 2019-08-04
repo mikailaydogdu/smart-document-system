@@ -2,9 +2,15 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, DetailView
 from django.db.models import Q
+from rest_framework.viewsets import ModelViewSet
 
 from Article.forms import ArticleCreateForm, ArticleItemCreateForm
 from Article.models import Article, Revisions
+from Article.serializers import ArticleSerializer, RrevisionSerializer
+
+
+from rest_framework.renderers import JSONRenderer
+from rest_framework.parsers import JSONParser
 
 
 class ArticleListView(LoginRequiredMixin, ListView):
@@ -24,6 +30,21 @@ class ArticleCreateView(LoginRequiredMixin, CreateView):
     success_url = reverse_lazy('anasayfa')
 
 
+
+class ArticleViewSet(ModelViewSet):
+    serializer_class = ArticleSerializer
+
+
+    def get_object(self, queryset= None):
+        return super(ArticleViewSet, self).get_object()
+
+    def get_queryset(self):
+        return Article.objects.filter(active=True)
+
+    def performe_create(self, serializer):
+        serializer.save()
+
+
 class ArticleItemListView(LoginRequiredMixin, ListView):
     model = Revisions
     template_name = 'article/revision_list.html'
@@ -34,6 +55,7 @@ class ArticleItemListView(LoginRequiredMixin, ListView):
             'Revision_list': Revisions.objects.filter(article_id=self.kwargs['pk']),})
         context['article_id']=self.kwargs['pk']
         return context
+
 
 
 class ArticileItemCreate(LoginRequiredMixin, CreateView):
@@ -47,6 +69,19 @@ class ArticileItemCreate(LoginRequiredMixin, CreateView):
         context['article_id'] = self.kwargs["pk"]
         # print(context)
         return context
+
+class ArticleItemViewSet(ModelViewSet):
+    serializer_class = RrevisionSerializer
+
+
+    def get_object(self, queryset= None):
+        return super(ArticleItemViewSet, self).get_object()
+
+    def get_queryset(self):
+        return Revisions.objects.all()
+
+    def performe_create(self, serializer):
+        serializer.save()
 
 
 class ArticleDetailView(LoginRequiredMixin, DetailView):
