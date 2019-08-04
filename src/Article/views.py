@@ -8,11 +8,6 @@ from Article.forms import ArticleCreateForm, ArticleItemCreateForm
 from Article.models import Article, Revisions
 from Article.serializers import ArticleSerializer, RrevisionSerializer
 
-
-from rest_framework.renderers import JSONRenderer
-from rest_framework.parsers import JSONParser
-
-
 class ArticleListView(LoginRequiredMixin, ListView):
     model = Article
     paginate_by = 100
